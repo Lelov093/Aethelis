@@ -1,0 +1,50 @@
+run_id: harbor_lantern_standard_deterministic_preview
+mode: deterministic_preview
+formal_experiment_result: false
+allow_real_llm: false
+dry_run: true
+apply: false
+activation:
+  mode: static_trace
+  scoring_version: rule_based_v0
+  top_k: 1
+  selection_threshold: 1
+  allow_real_llm: false
+  allow_private_belief_scoring: false
+step_plan:
+  - step_id: step_elin_manifest_commit
+    agent_id: elin
+    actor_type: agent
+    scenario_id: elin_inspect_cargo_manifest_fixture
+    allow_real_llm: false
+    apply: true
+  - step_id: step_sora_release_crates_commit
+    agent_id: sora
+    actor_type: agent
+    scenario_id: sora_release_relief_crates_fixture
+    allow_real_llm: false
+    apply: true
+  - step_id: step_niven_false_pass_reject
+    agent_id: niven
+    actor_type: agent
+    scenario_id: niven_search_lantern_wrong_pass
+    allow_real_llm: false
+    apply: false
+  - step_id: step_niven_force_gate
+    agent_id: niven
+    actor_type: agent
+    scenario_id: niven_force_quay_lock
+    allow_real_llm: false
+    apply: false
+  - step_id: step_player_claim_pass_reject
+    agent_id: player
+    actor_type: player
+    scenario_id: player_claim_harbor_pass
+    allow_real_llm: false
+    apply: false
+  - step_id: step_player_request_gate
+    agent_id: player
+    actor_type: player
+    scenario_id: player_request_open_quay_gate
+    allow_real_llm: false
+    apply: false

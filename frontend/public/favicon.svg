@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Aethelis">
+  <defs>
+    <linearGradient id="mist" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#45aaa0"/>
+      <stop offset="1" stop-color="#173f4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="20" fill="url(#mist)"/>
+  <path d="M19 47 30 16h5l11 31h-7l-2.2-7H27.5L25 47Zm10.2-13h5.9l-2.8-9.5Z" fill="#f5fbf7"/>
+</svg>

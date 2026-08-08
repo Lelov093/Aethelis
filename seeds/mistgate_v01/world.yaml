@@ -1,0 +1,163 @@
+schema_version: "0.1"
+world_id: mistgate
+name: Mistgate
+summary: >
+  A mist-bound civic quarter where a failing Dawn Regulator threatens the archive,
+  council, market, workshop, and old aqueduct districts.
+locations:
+  - id: central_archive
+    name: Central Archive
+    summary: A sealed archive hall containing civic records and restricted repair ledgers.
+    tags: [archive, civic]
+  - id: council_square
+    name: Council Square
+    summary: A public civic square where guard notices, player claims, and repair permissions surface.
+    tags: [civic, public_claims, guard_station]
+    facilities: [guard_tower]
+  - id: market_row
+    name: Market Row
+    summary: A pressured trade street where stabilizer parts and credit circulate through the guild.
+    tags: [market, resource_pressure]
+  - id: workshop_lane
+    name: Workshop Lane
+    summary: A lane of repair shops containing Ivo Renn's workbench and locked workshop safe.
+    tags: [workshop, repair]
+  - id: old_aqueduct
+    name: Old Aqueduct
+    summary: An unstable old waterwork housing the Dawn Regulator's exposed calibration assembly.
+    tags: [aqueduct, dawn_regulator, high_impact]
+factions:
+  - id: archive_order
+    name: Archive Order
+    summary: Custodians of civic records and restricted maintenance history.
+  - id: civic_guard
+    name: Civic Guard
+    summary: Local guards who enforce access boundaries without full technical knowledge.
+  - id: merchant_guild
+    name: Merchant Guild
+    summary: Traders controlling scarce repair parts under market pressure.
+entities:
+  - id: harmonic_tuner
+    name: Harmonic Tuner
+    kind: device
+    location_id: central_archive
+    status: active
+    summary: An archive-side tuning device that records Dawn Regulator instability.
+    tags: [unstable, repair_signal]
+  - id: dawn_regulator
+    name: Dawn Regulator
+    kind: device
+    location_id: old_aqueduct
+    status: active
+    summary: The failing civic regulator that must be stabilized before mist pressure worsens.
+    tags: [unstable, repair_target, high_impact]
+  - id: workshop_safe
+    name: Workshop Safe
+    kind: container
+    location_id: workshop_lane
+    status: active
+    summary: A locked safe in Ivo Renn's workshop that can be lawfully inspected by Ivo.
+    tags: [locked, private_workspace]
+resources:
+  - id: calibration_key
+    name: Calibration Key
+    kind: key_item
+    quantity: 1
+    location_id: workshop_lane
+    owner_entity_id: workshop_safe
+    discovery_state:
+      discovered_by_agent_ids: []
+    pressure_weight: 0.8
+    summary: The real key required to stabilize the Dawn Regulator.
+  - id: stabilizer_parts
+    name: Stabilizer Parts
+    kind: material
+    quantity: 3
+    location_id: market_row
+    discovery_state:
+      discovered_by_agent_ids: []
+    pressure_weight: 1.0
+    summary: Scarce parts controlled through merchant-guild trade channels.
+  - id: gate_lens
+    name: Gate Lens
+    kind: key_item
+    quantity: 1
+    location_id: old_aqueduct
+    discovery_state:
+      discovered_by_agent_ids: []
+    pressure_weight: 0.6
+    summary: A regulator lens required to validate any high-impact repair attempt.
+  - id: market_credit
+    name: Market Credit
+    kind: service
+    quantity: 5
+    location_id: market_row
+    discovery_state:
+      discovered_by_agent_ids: []
+    pressure_weight: 0.3
+    summary: Negotiable credit used by the Merchant Guild to trade repair access and parts.
+canon_facts:
+  - id: canon_key_in_workshop_safe
+    statement: The calibration key is physically inside the workshop safe.
+    visibility: hidden_canon
+    subject_ids: [calibration_key]
+    object_ids: [workshop_safe]
+    location_id: workshop_lane
+    source: seed
+    tags: [location_truth]
+  - id: canon_dawn_regulator_unstable
+    statement: The Dawn Regulator is unstable and requires repair soon.
+    visibility: public
+    subject_ids: [dawn_regulator]
+    location_id: old_aqueduct
+    source: seed
+    tags: [world_pressure]
+  - id: canon_tuner_records_regulator_instability
+    statement: The harmonic tuner records instability from the Dawn Regulator.
+    visibility: public
+    subject_ids: [harmonic_tuner]
+    object_ids: [dawn_regulator]
+    location_id: central_archive
+    source: seed
+    tags: [public_signal]
+  - id: canon_repair_requires_key_and_parts
+    statement: Repairing the Dawn Regulator requires the calibration key and stabilizer parts.
+    visibility: hidden_canon
+    subject_ids: [dawn_regulator]
+    object_ids: [calibration_key, stabilizer_parts]
+    source: seed
+    tags: [repair_constraint]
+  - id: canon_gate_lens_needed_for_repair_validation
+    statement: A gate lens is required to validate a safe Dawn Regulator repair attempt.
+    visibility: hidden_canon
+    subject_ids: [dawn_regulator]
+    object_ids: [gate_lens]
+    location_id: old_aqueduct
+    source: seed
+    tags: [repair_constraint]
+  - id: canon_stabilizer_parts_limited
+    statement: Stabilizer parts are limited and concentrated around Market Row.
+    visibility: public
+    subject_ids: [stabilizer_parts]
+    location_id: market_row
+    source: seed
+    tags: [resource_pressure]
+  - id: canon_council_square_handles_repair_permissions
+    statement: Council Square is where repair permits and guard clearance are publicly governed.
+    visibility: public
+    subject_ids: [council_square]
+    source: seed
+    tags: [permission_governance]
+  - id: canon_archive_has_maintenance_records_not_key
+    statement: The Central Archive contains maintenance records, not the calibration key itself.
+    visibility: hidden_canon
+    subject_ids: [central_archive]
+    object_ids: [calibration_key]
+    source: seed
+    tags: [belief_canon_divergence]
+player:
+  id: player
+  summary: Player context exists for future governed input assimilation; it does not write canon directly.
+  current_location_id: council_square
+  governance_notes:
+    - Player input must become candidate information before canon assimilation.

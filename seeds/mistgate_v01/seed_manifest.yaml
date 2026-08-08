@@ -1,0 +1,10 @@
+seed_id: mistgate_v01
+schema_version: "0.1"
+name: Mistgate v0.1
+description: Product-aligned Mistgate V0.1 governed-world seed for observation foundation validation.
+files:
+  world: world.yaml
+  agents: agents.yaml
+  beliefs: beliefs.yaml
+  memories: memories.yaml
+  metadata: metadata.yaml

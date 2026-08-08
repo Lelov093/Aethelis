@@ -1,0 +1,34 @@
+regression_id: v02_runtime_regression
+artifact_dir: runs/v02_runtime_regression
+targets:
+  - id: standard_preview
+    kind: run_world_preview
+    seed: seeds/mistgate_v01
+    config: configs/standard_run_deterministic_regression.yaml
+
+  - id: standard_apply
+    kind: run_world_apply
+    seed: seeds/mistgate_v01
+    config: configs/standard_run_deterministic_regression.yaml
+
+  - id: standard_formal
+    kind: experiment_run
+    seed: seeds/mistgate_v01
+    config: configs/standard_experiment_deterministic_regression.yaml
+
+  - id: standard_trace_validate
+    kind: trace_validate
+    trace: runs/standard_mistgate_formal_experiment/trace.json
+
+  - id: standard_evaluation_check
+    kind: evaluation_check
+    trace: runs/standard_mistgate_formal_experiment/trace.json
+
+  - id: standard_evaluate
+    kind: experiment_evaluate
+    run: runs/standard_mistgate_formal_experiment
+
+  - id: standard_compare
+    kind: experiment_compare
+    seed: seeds/mistgate_v01
+    config: configs/standard_experiment_deterministic_regression.yaml

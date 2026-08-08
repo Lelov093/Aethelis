@@ -1,0 +1,47 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Frontend
+node_modules/
+coverage/
+
+# Internal development material and runtime outputs
+docs/
+reports/
+runs/
+AGENTS.md
+output/playwright/
+.playwright-cli/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp

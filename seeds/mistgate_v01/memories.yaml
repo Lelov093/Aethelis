@@ -1,0 +1,75 @@
+schema_version: "0.1"
+memories:
+  - id: mem_mira_archive_ledger
+    owner_agent_id: mira
+    kind: observation
+    summary: Mira found an old ledger entry implying archive staff once handled repair documentation.
+    related_location_id: central_archive
+    related_entity_ids: [harmonic_tuner]
+    salience: 4
+  - id: mem_mira_notice_square
+    owner_agent_id: mira
+    kind: observation
+    summary: Mira saw Council Square notices asking citizens to report regulator symptoms.
+    related_location_id: council_square
+    related_agent_ids: [rowan]
+    salience: 2
+  - id: mem_ivo_safe_installation
+    owner_agent_id: ivo
+    kind: observation
+    summary: Ivo remembers installing a secure compartment in the workshop safe.
+    related_location_id: workshop_lane
+    related_entity_ids: [workshop_safe]
+    salience: 5
+  - id: mem_ivo_taren_repair_warning
+    owner_agent_id: ivo
+    kind: warning
+    summary: Ivo heard Taren warn that aqueduct repair attempts require validated parts and civic clearance.
+    related_location_id: old_aqueduct
+    related_agent_ids: [taren]
+    related_resource_ids: [gate_lens]
+    salience: 3
+  - id: mem_selka_parts_inventory
+    owner_agent_id: selka
+    kind: task
+    summary: Selka checked the guild inventory and confirmed only three stabilizer parts are available.
+    related_location_id: market_row
+    related_resource_ids: [stabilizer_parts]
+    salience: 4
+  - id: mem_selka_credit_pressure
+    owner_agent_id: selka
+    kind: conversation
+    summary: Selka negotiated market credit terms while citizens argued over repair urgency.
+    related_location_id: market_row
+    related_resource_ids: [market_credit]
+    salience: 3
+  - id: mem_rowan_tuner_warning
+    owner_agent_id: rowan
+    kind: warning
+    summary: Rowan received a civic warning that regulator-adjacent devices should not be disturbed casually.
+    related_location_id: council_square
+    related_entity_ids: [dawn_regulator]
+    salience: 3
+  - id: mem_rowan_repair_order
+    owner_agent_id: rowan
+    kind: task
+    summary: Rowan logged that guard clearance must be issued from the guard tower station at Council Square.
+    related_location_id: council_square
+    related_agent_ids: [taren]
+    salience: 4
+  - id: mem_nara_market_rumor
+    owner_agent_id: nara
+    kind: conversation
+    summary: Nara overheard a low-confidence rumor that the calibration key once passed through Market Row.
+    related_location_id: market_row
+    related_agent_ids: [selka]
+    related_resource_ids: [calibration_key]
+    salience: 3
+  - id: mem_taren_aqueduct_surge
+    owner_agent_id: taren
+    kind: warning
+    summary: Taren observed a Dawn Regulator surge at the Old Aqueduct and marked it as high-impact.
+    related_location_id: old_aqueduct
+    related_entity_ids: [dawn_regulator]
+    related_resource_ids: [gate_lens]
+    salience: 5

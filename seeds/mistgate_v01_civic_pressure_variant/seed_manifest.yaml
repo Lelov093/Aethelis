@@ -1,0 +1,10 @@
+seed_id: mistgate_v01_civic_pressure_variant
+schema_version: "0.1"
+name: Mistgate v0.1 Civic Pressure Variant
+description: Small deterministic Mistgate variant with stronger civic pressure for V0.4 matrix evaluation.
+files:
+  world: world.yaml
+  agents: agents.yaml
+  beliefs: beliefs.yaml
+  memories: memories.yaml
+  metadata: metadata.yaml

@@ -1,0 +1,18 @@
+regression_id: v07_runtime_regression
+artifact_dir: runs/v07_runtime_regression
+targets:
+  - id: v07_scenario_contract_load
+    kind: scenario_contract_load
+
+  - id: v07_scenario_contract_fixture_coverage
+    kind: scenario_contract_fixture_coverage
+
+  - id: v07_scenario_contract_verifier_rule_pack_parity
+    kind: scenario_contract_verifier_rule_pack_parity
+
+  - id: v07_scenario_contract_matrix_compatibility
+    kind: scenario_contract_matrix_compatibility
+    summary: runs/v05_run_matrix/matrix_summary.json
+
+  - id: v07_scenario_contract_no_provider
+    kind: scenario_contract_no_provider

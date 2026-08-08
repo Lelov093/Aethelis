@@ -1,0 +1,20 @@
+run_id: harbor_lantern_real_provider_preview
+mode: real_provider_preview
+formal_experiment_result: false
+allow_real_llm: true
+dry_run: true
+apply: false
+activation:
+  mode: static_trace
+  scoring_version: rule_based_v0
+  top_k: 1
+  selection_threshold: 1
+  allow_real_llm: false
+  allow_private_belief_scoring: false
+step_plan:
+  - step_id: step_elin_real_provider_manifest
+    agent_id: elin
+    actor_type: agent
+    scenario_id: elin_inspect_cargo_manifest
+    allow_real_llm: true
+    apply: false

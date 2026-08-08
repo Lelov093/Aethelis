@@ -1,0 +1,126 @@
+schema_version: "0.1"
+world_id: harbor_lantern
+name: Harbor Lantern
+summary: >
+  A small harbor checkpoint where relief supplies, signal fuel, and access
+  authority create governed pressure around the lantern room and quay gate.
+locations:
+  - id: ledger_house
+    name: Ledger House
+    summary: A public record room holding cargo manifests and harbor pass ledgers.
+    tags: [records, civic]
+  - id: quay_gate
+    name: Quay Gate
+    summary: A guarded gate where relief crates and harbor access are governed.
+    tags: [gate, supplies, permission]
+  - id: lantern_room
+    name: Lantern Room
+    summary: A restricted signal room whose lantern console needs fuel oversight.
+    tags: [signal, restricted]
+factions:
+  - id: harbor_watch
+    name: Harbor Watch
+    summary: Watch officers who control quay access and public safety.
+  - id: ledger_office
+    name: Ledger Office
+    summary: Clerks responsible for manifests, passes, and supply records.
+  - id: relief_guild
+    name: Relief Guild
+    summary: Supply keepers responsible for moving relief crates.
+entities:
+  - id: cargo_manifest
+    name: Cargo Manifest
+    kind: artifact
+    location_id: ledger_house
+    status: active
+    summary: A manifest recording the current harbor pass and relief crate status.
+    tags: [records, evidence]
+  - id: quay_lock
+    name: Quay Lock
+    kind: door
+    location_id: quay_gate
+    status: active
+    summary: A guarded lock controlling access from the quay gate.
+    tags: [locked, permission]
+  - id: lantern_console
+    name: Lantern Console
+    kind: device
+    location_id: lantern_room
+    status: active
+    summary: A signal console that needs fuel before the harbor lantern can stay lit.
+    tags: [signal, restricted]
+resources:
+  - id: harbor_pass
+    name: Harbor Pass
+    kind: key_item
+    quantity: 1
+    location_id: ledger_house
+    owner_entity_id: cargo_manifest
+    discovery_state:
+      discovered_by_agent_ids: []
+    pressure_weight: 0.7
+    summary: The current pass authorizing restricted quay movement.
+  - id: signal_oil
+    name: Signal Oil
+    kind: material
+    quantity: 2
+    location_id: lantern_room
+    discovery_state:
+      discovered_by_agent_ids: []
+    pressure_weight: 0.8
+    summary: Fuel needed to keep the harbor lantern active.
+  - id: relief_crates
+    name: Relief Crates
+    kind: material
+    quantity: 4
+    location_id: quay_gate
+    discovery_state:
+      discovered_by_agent_ids: []
+    pressure_weight: 1.0
+    summary: Crates waiting for governed release through the quay gate.
+canon_facts:
+  - id: canon_harbor_pass_in_manifest
+    statement: The harbor pass is recorded inside the cargo manifest at the Ledger House.
+    visibility: hidden_canon
+    subject_ids: [harbor_pass]
+    object_ids: [cargo_manifest]
+    location_id: ledger_house
+    source: seed
+    tags: [location_truth]
+  - id: canon_lantern_requires_signal_oil
+    statement: The lantern console requires signal oil before extended signal use.
+    visibility: public
+    subject_ids: [lantern_console]
+    object_ids: [signal_oil]
+    location_id: lantern_room
+    source: seed
+    tags: [resource_pressure]
+  - id: canon_relief_crates_wait_at_quay
+    statement: Four relief crates are still waiting at the Quay Gate.
+    visibility: public
+    subject_ids: [relief_crates]
+    location_id: quay_gate
+    source: seed
+    tags: [resource_pressure]
+  - id: canon_quay_gate_requires_watch_clearance
+    statement: Quay Gate access requires Harbor Watch clearance.
+    visibility: public
+    subject_ids: [quay_gate]
+    object_ids: [quay_lock]
+    location_id: quay_gate
+    source: seed
+    tags: [permission_governance]
+  - id: canon_manifest_is_evidence_not_authority
+    statement: Cargo manifest records are evidence, not direct authority to move supplies.
+    visibility: hidden_canon
+    subject_ids: [cargo_manifest]
+    object_ids: [relief_crates]
+    location_id: ledger_house
+    source: seed
+    tags: [governance_boundary]
+player:
+  id: player
+  summary: Player context exists for governed harbor input; it cannot write canon directly.
+  current_location_id: quay_gate
+  governance_notes:
+    - Player input must route through candidate or belief handling before any canon change.

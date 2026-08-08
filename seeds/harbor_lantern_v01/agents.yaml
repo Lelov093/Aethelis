@@ -1,0 +1,91 @@
+schema_version: "0.1"
+agents:
+  - id: elin
+    name: Elin Mora
+    faction_id: ledger_office
+    role: Harbor Records Clerk
+    current_location_id: ledger_house
+    public_summary: Elin maintains cargo manifests and harbor pass records.
+    private_summary: Elin suspects the manifest can clarify pass authority but cannot move goods alone.
+    cognitive_state:
+      goals:
+        - id: goal_elin_verify_manifest
+          description: Verify manifest records before anyone acts on harbor pass claims.
+          status: active
+          priority: 5
+      knowledge_boundaries:
+        - Elin can inspect records but cannot convert a record into canon authority alone.
+      attention: [cargo_manifest, harbor_pass]
+  - id: bram
+    name: Bram Holt
+    faction_id: harbor_watch
+    role: Watch Officer
+    current_location_id: quay_gate
+    public_summary: Bram controls access at the Quay Gate.
+    private_summary: Bram is worried that pressure to move supplies may bypass watch clearance.
+    cognitive_state:
+      goals:
+        - id: goal_bram_hold_gate
+          description: Keep the quay gate governed while relief pressure rises.
+          status: active
+          priority: 4
+      knowledge_boundaries:
+        - Bram does not know hidden manifest entries unless a verified event reveals them.
+      attention: [quay_gate, quay_lock, relief_crates]
+  - id: sora
+    name: Sora Venn
+    faction_id: relief_guild
+    role: Supply Keeper
+    current_location_id: quay_gate
+    public_summary: Sora accounts for relief crates waiting at the quay.
+    private_summary: Sora knows crate counts but still needs governed clearance to release supplies.
+    cognitive_state:
+      goals:
+        - id: goal_sora_release_crates
+          description: Release only verified relief crates without bypassing gate authority.
+          status: active
+          priority: 4
+      knowledge_boundaries:
+        - Sora tracks crates, not harbor pass authority.
+      attention: [relief_crates, quay_gate]
+  - id: niven
+    name: Niven Sol
+    faction_id: harbor_watch
+    role: Lantern Engineer
+    current_location_id: lantern_room
+    public_summary: Niven maintains the lantern console and signal oil use.
+    private_summary: Niven suspects the harbor pass may be near the lantern console, but this is wrong.
+    cognitive_state:
+      goals:
+        - id: goal_niven_keep_signal
+          description: Keep the lantern signal stable without forcing restricted gate access.
+          status: active
+          priority: 4
+      knowledge_boundaries:
+        - Niven does not know the harbor pass location at seed start.
+      attention: [lantern_console, signal_oil, harbor_pass]
+relationships:
+  - id: rel_elin_bram
+    source_agent_id: elin
+    target_agent_id: bram
+    kind: professional
+    summary: Elin needs Bram to respect manifest evidence without bypassing access governance.
+    trust: 2
+  - id: rel_bram_sora
+    source_agent_id: bram
+    target_agent_id: sora
+    kind: tense
+    summary: Bram distrusts pressure to release supplies without complete clearance.
+    trust: -1
+  - id: rel_sora_niven
+    source_agent_id: sora
+    target_agent_id: niven
+    kind: professional
+    summary: Sora depends on Niven's signal status before moving supplies.
+    trust: 2
+  - id: rel_niven_elin
+    source_agent_id: niven
+    target_agent_id: elin
+    kind: trusts
+    summary: Niven trusts Elin's records more than his own guess about the pass.
+    trust: 2

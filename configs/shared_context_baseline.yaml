@@ -1,0 +1,8 @@
+status: placeholder
+implemented: false
+config_type: baseline_placeholder
+formal_experiment_result: false
+allow_real_llm: false
+notes:
+  - Reserved for future baseline configuration.
+  - Phase 2 runtime foundation does not implement baseline execution.

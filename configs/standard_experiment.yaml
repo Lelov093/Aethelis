@@ -1,0 +1,15 @@
+run_id: standard_mistgate_real_provider_experiment
+seed_path: seeds/mistgate_v01
+mode: formal_real_provider
+formal_experiment_result: true
+random_seed: 7
+step_count: 20
+provider_mode: real_provider
+baseline_mode: none
+baseline_implemented: false
+ablation_mode: none
+ablation_implemented: false
+write_artifacts: true
+apply_state_diffs: false
+scenario_cycle:
+  - inspect_workshop_safe

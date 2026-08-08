@@ -1,0 +1,40 @@
+schema_version: "0.1"
+memories:
+  - id: mem_elin_manifest_audit
+    owner_agent_id: elin
+    kind: task
+    summary: Elin began auditing the latest cargo manifest after pass claims conflicted.
+    related_location_id: ledger_house
+    related_entity_ids: [cargo_manifest]
+    related_resource_ids: [harbor_pass]
+    salience: 5
+  - id: mem_bram_gate_order
+    owner_agent_id: bram
+    kind: warning
+    summary: Bram logged that the quay lock must not be forced during relief pressure.
+    related_location_id: quay_gate
+    related_entity_ids: [quay_lock]
+    salience: 4
+  - id: mem_sora_crate_count
+    owner_agent_id: sora
+    kind: task
+    summary: Sora counted four relief crates waiting at the quay gate.
+    related_location_id: quay_gate
+    related_resource_ids: [relief_crates]
+    salience: 4
+  - id: mem_sora_signal_delay
+    owner_agent_id: sora
+    kind: conversation
+    summary: Sora heard that signal delays make relief movement more urgent.
+    related_location_id: quay_gate
+    related_agent_ids: [niven]
+    related_resource_ids: [signal_oil]
+    salience: 3
+  - id: mem_niven_signal_shift
+    owner_agent_id: niven
+    kind: observation
+    summary: Niven saw old signal tools near the lantern console and guessed the pass may be there.
+    related_location_id: lantern_room
+    related_entity_ids: [lantern_console]
+    related_resource_ids: [harbor_pass, signal_oil]
+    salience: 4

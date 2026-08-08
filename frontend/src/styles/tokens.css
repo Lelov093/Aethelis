@@ -1,0 +1,22 @@
+:root {
+  font-family: Inter, "Noto Sans SC", "Microsoft YaHei UI", system-ui, sans-serif;
+  color: #16343d;
+  background: #eef7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #16343d;
+  --muted: #607982;
+  --line: rgba(32, 83, 91, 0.14);
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-strong: #fafffe;
+  --teal: #197d7a;
+  --teal-deep: #0f5d60;
+  --mint: #9ee3cf;
+  --sky: #c9e8f2;
+  --cream: #fff5df;
+  --danger: #a64c5e;
+  --shadow: 0 24px 70px rgba(42, 84, 85, 0.13);
+  --radius-lg: 30px;
+  --radius-md: 20px;
+  --radius-sm: 12px;
+}

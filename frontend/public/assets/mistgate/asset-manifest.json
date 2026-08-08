@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "mistgate-player-scenes-v1",
+  "status": "approved_for_product_use",
+  "generated_at": "2026-08-02",
+  "generator": "OpenAI built-in image generation",
+  "derivative_format": "JPEG quality 88 derived from preserved source PNG output",
+  "policy": {
+    "original_ai_assisted": true,
+    "living_artist_imitation": false,
+    "human_visual_direction_approved": true,
+    "final_asset_review_required": false,
+    "distribution_review_required": true
+  },
+  "assets": [
+    {
+      "slot_id": "asset_scene_council_square",
+      "subject_id": "council_square",
+      "kind": "location_scene",
+      "status": "approved",
+      "uri": "/assets/mistgate/council-square-v1.jpg",
+      "source_output_id": "exec-2560bb93-436c-4cd0-afee-33652d731295"
+    },
+    {
+      "slot_id": "asset_scene_central_archive",
+      "subject_id": "central_archive",
+      "kind": "location_scene",
+      "status": "approved",
+      "uri": "/assets/mistgate/central-archive-v1.jpg",
+      "source_output_id": "exec-6038e485-a8dc-478b-8979-82465cadca77"
+    },
+    {
+      "slot_id": "asset_scene_market_row",
+      "subject_id": "market_row",
+      "kind": "location_scene",
+      "status": "approved",
+      "uri": "/assets/mistgate/market-row-v1.jpg",
+      "source_output_id": "exec-53b190e4-a7e2-49bc-ac36-b8707c230654"
+    },
+    {
+      "slot_id": "asset_scene_workshop_lane",
+      "subject_id": "workshop_lane",
+      "kind": "location_scene",
+      "status": "approved",
+      "uri": "/assets/mistgate/workshop-lane-v1.jpg",
+      "source_output_id": "exec-b1920993-5c91-4a67-92c6-962ffc0fbf52"
+    },
+    {
+      "slot_id": "asset_scene_old_aqueduct",
+      "subject_id": "old_aqueduct",
+      "kind": "location_scene",
+      "status": "approved",
+      "uri": "/assets/mistgate/old-aqueduct-v1.jpg",
+      "source_output_id": "exec-ff4e4ddc-6aeb-47d4-be66-879b20ca2c4d"
+    },
+    {
+      "slot_id": "asset_portrait_mira",
+      "subject_id": "mira",
+      "kind": "character_portrait",
+      "status": "approved",
+      "uri": "/assets/mistgate/mira-v1.jpg",
+      "source_output_id": "exec-b18b4e0d-b442-4667-b216-706d72b0724f"
+    },
+    {
+      "slot_id": "asset_portrait_rowan",
+      "subject_id": "rowan",
+      "kind": "character_portrait",
+      "status": "approved",
+      "uri": "/assets/mistgate/rowan-v1.jpg",
+      "source_output_id": "exec-382b961d-aeb4-425d-a641-37d7562e0734"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+schema_version: "0.1"
+permission_tags:
+  - archive_seal
+  - repair_permit
+  - guard_clearance
+public_facts:
+  - id: public_fact_regulator_worsening
+    claim: Council Square notices say the Dawn Regulator instability is worsening.
+    subject_ids: [dawn_regulator]
+    object_ids: [council_square]
+    location_id: council_square
+    visibility_scope: public
+  - id: public_fact_parts_scarce
+    claim: Market Row traders openly acknowledge stabilizer parts are scarce.
+    subject_ids: [stabilizer_parts]
+    object_ids: [market_row]
+    location_id: market_row
+    visibility_scope: public
+  - id: public_fact_aqueduct_surge
+    claim: Citizens near the Old Aqueduct have seen mist surges.
+    subject_ids: [old_aqueduct, dawn_regulator]
+    location_id: old_aqueduct
+    visibility_scope: public
+  - id: public_fact_archive_records_exist
+    claim: The Central Archive holds old Dawn Regulator maintenance records.
+    subject_ids: [central_archive, dawn_regulator]
+    location_id: central_archive
+    visibility_scope: public
+rumors:
+  - id: rumor_key_passed_market
+    claim: A low-confidence rumor says the calibration key passed through Market Row.
+    source_agent_id: nara
+    confidence: low
+    subject_ids: [calibration_key]
+    object_ids: [market_row]
+    location_id: market_row
+    visibility_scope: location_visible
+  - id: rumor_guild_hoards_parts
+    claim: Some citizens claim the Merchant Guild is hoarding stabilizer parts.
+    source_label: civic_chatter
+    confidence: medium
+    subject_ids: [stabilizer_parts]
+    object_ids: [merchant_guild]
+    location_id: council_square
+    visibility_scope: public
+  - id: rumor_archive_seal_unlocks_repair_map
+    claim: A rumor says an archive seal can reveal a restricted repair map.
+    source_agent_id: mira
+    confidence: medium
+    subject_ids: [archive_seal]
+    object_ids: [central_archive]
+    location_id: central_archive
+    visibility_scope: location_visible
+pressure_seeds:
+  - id: pressure_regulator_instability
+    pressure_type: regulator_instability
+    level: 7
+    location_id: old_aqueduct
+    resource_id: gate_lens
+    description: Dawn Regulator instability is the central pressure driver.
+  - id: pressure_parts_scarcity
+    pressure_type: parts_scarcity
+    level: 6
+    location_id: market_row
+    resource_id: stabilizer_parts
+    description: Stabilizer parts scarcity drives merchant tension.
+  - id: pressure_civic_trust
+    pressure_type: civic_trust
+    level: 4
+    location_id: council_square
+    description: Citizens are unsure whether guard restrictions help or delay repairs.
+  - id: pressure_rumor_spread
+    pressure_type: rumor_spread
+    level: 5
+    location_id: market_row
+    description: Market rumors can influence player claims and agent beliefs.
+action_metadata:
+  - id: action_inspect
+    action_type: inspect
+    allowed_actor_types: [agent]
+    required_permission_tags: []
+    target_types: [entity, resource]
+    description: Inspect a visible local object without modifying world state directly.
+  - id: action_search
+    action_type: search
+    allowed_actor_types: [agent]
+    required_permission_tags: []
+    target_types: [location, entity]
+    description: Search a visible location or record source for candidate evidence.
+  - id: action_request_access
+    action_type: request_access
+    allowed_actor_types: [agent, player]
+    required_permission_tags: [guard_clearance]
+    target_types: [location, permission]
+    description: Request access through council governance instead of bypassing verification.
+  - id: action_trade
+    action_type: trade
+    allowed_actor_types: [agent]
+    required_permission_tags: []
+    target_types: [resource]
+    description: Trade market resources without changing canon directly.
+  - id: action_repair_attempt
+    action_type: repair_attempt
+    allowed_actor_types: [agent]
+    required_permission_tags: [repair_permit]
+    target_types: [entity, resource]
+    description: Attempt a high-impact repair only after verification gates.
+  - id: action_report_rumor
+    action_type: report_rumor
+    allowed_actor_types: [agent, player]
+    required_permission_tags: []
+    target_types: [rumor]
+    description: Report a rumor as non-canon candidate information.

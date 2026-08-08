@@ -1,0 +1,20 @@
+regression_id: v04_runtime_regression
+artifact_dir: runs/v04_runtime_regression
+targets:
+  - id: v04_matrix_config_load
+    kind: matrix_config_load
+    matrix: configs/v04_run_matrix.yaml
+    evaluation: configs/v04_evaluation.yaml
+
+  - id: v04_matrix_run
+    kind: matrix_run
+    matrix: configs/v04_run_matrix.yaml
+    evaluation: configs/v04_evaluation.yaml
+
+  - id: v04_aggregate_summary
+    kind: aggregate_summary
+    summary: runs/v04_run_matrix/matrix_summary.json
+
+  - id: v04_artifact_safety
+    kind: artifact_safety
+    summary: runs/v04_run_matrix/matrix_summary.json

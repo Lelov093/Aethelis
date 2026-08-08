@@ -1,0 +1,62 @@
+run_id: standard_mistgate_deterministic_preview
+mode: deterministic_preview
+formal_experiment_result: false
+allow_real_llm: false
+dry_run: true
+apply: false
+activation:
+  mode: static_trace
+  scoring_version: rule_based_v0
+  top_k: 1
+  selection_threshold: 1
+  allow_real_llm: false
+  allow_private_belief_scoring: false
+step_plan:
+  - step_id: step_ivo_fixture_commit
+    agent_id: ivo
+    actor_type: agent
+    scenario_id: ivo_inspect_workshop_safe_fixture
+    allow_real_llm: false
+    apply: true
+  - step_id: step_mira_wrong_key_reject
+    agent_id: mira
+    actor_type: agent
+    scenario_id: mira_search_archive_wrong_key
+    allow_real_llm: false
+    apply: false
+  - step_id: step_selka_consume_part_commit
+    agent_id: selka
+    actor_type: agent
+    scenario_id: selka_consume_stabilizer_part_fixture
+    allow_real_llm: false
+    apply: true
+  - step_id: step_selka_restock_credit_commit
+    agent_id: selka
+    actor_type: agent
+    scenario_id: selka_restock_market_credit_fixture
+    allow_real_llm: false
+    apply: true
+  - step_id: step_ivo_incomplete_revise
+    agent_id: ivo
+    actor_type: agent
+    scenario_id: malformed_or_incomplete_action
+    allow_real_llm: false
+    apply: false
+  - step_id: step_rowan_force_safe_gate
+    agent_id: rowan
+    actor_type: agent
+    scenario_id: unsafe_force_open_safe
+    allow_real_llm: false
+    apply: false
+  - step_id: step_player_claim_reject
+    agent_id: player
+    actor_type: player
+    scenario_id: player_claim_key_in_hand
+    allow_real_llm: false
+    apply: false
+  - step_id: step_player_request_gate
+    agent_id: player
+    actor_type: player
+    scenario_id: player_request_open_workshop_safe
+    allow_real_llm: false
+    apply: false

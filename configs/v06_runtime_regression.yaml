@@ -1,0 +1,14 @@
+regression_id: v06_runtime_regression
+artifact_dir: runs/v06_runtime_regression
+targets:
+  - id: v06_matrix_inspect_load
+    kind: matrix_inspect_load
+    summary: runs/v05_run_matrix/matrix_summary.json
+
+  - id: v06_matrix_inspect_review_protocol
+    kind: matrix_inspect_review_protocol
+    summary: runs/v05_run_matrix/matrix_summary.json
+
+  - id: v06_matrix_inspect_safety
+    kind: matrix_inspect_safety
+    summary: runs/v05_run_matrix/matrix_summary.json

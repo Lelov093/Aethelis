@@ -1,0 +1,21 @@
+run_id: r3_harbor_ablation_comparison_steps20_20260705
+seed_path: seeds/harbor_lantern_v01
+mode: formal_deterministic
+formal_experiment_result: true
+random_seed: 13
+step_count: 20
+provider_mode: no_provider
+baseline_mode: none
+baseline_implemented: false
+ablation_mode: none
+ablation_implemented: false
+write_artifacts: true
+apply_state_diffs: false
+comparison_variant_scope: ablations
+scenario_cycle:
+  - elin_inspect_cargo_manifest_fixture
+  - sora_release_relief_crates_fixture
+  - niven_search_lantern_wrong_pass
+  - niven_force_quay_lock
+  - player_claim_harbor_pass
+  - player_request_open_quay_gate

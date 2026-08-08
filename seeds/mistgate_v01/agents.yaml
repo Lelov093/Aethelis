@@ -1,0 +1,142 @@
+schema_version: "0.1"
+agents:
+  - id: mira
+    name: Mira Vale
+    faction_id: archive_order
+    role: Archivist
+    current_location_id: central_archive
+    public_summary: Mira searches archive records for repair clues.
+    private_summary: Mira suspects the key may be hidden in archive stacks, but this is wrong.
+    cognitive_state:
+      goals:
+        - id: goal_mira_search_archive
+          description: Search the Central Archive for records about the calibration key.
+          status: active
+          priority: 4
+      knowledge_boundaries:
+        - Mira does not know the key's true location at seed start.
+      attention: [harmonic_tuner, calibration_key]
+  - id: rowan
+    name: Rowan Kest
+    faction_id: civic_guard
+    role: Guard Captain
+    current_location_id: council_square
+    role_station: guard_tower
+    public_summary: Rowan controls civic access from the guard tower station at Council Square.
+    private_summary: Rowan knows the regulator is unstable but does not know where the key is.
+    cognitive_state:
+      goals:
+        - id: goal_rowan_secure_access
+          description: Keep repair access safe while allowing lawful work.
+          status: active
+          priority: 3
+      knowledge_boundaries:
+        - Rowan must not know the workshop-safe secret unless a verified event reveals it.
+      attention: [council_square, dawn_regulator]
+  - id: selka
+    name: Selka Orin
+    faction_id: merchant_guild
+    role: Guild Factor
+    current_location_id: market_row
+    public_summary: Selka negotiates scarce stabilizer parts under trade pressure.
+    private_summary: Selka can trade parts and market credit but will protect guild leverage.
+    cognitive_state:
+      goals:
+        - id: goal_selka_trade_parts
+          description: Trade stabilizer parts without weakening merchant guild leverage.
+          status: active
+          priority: 3
+      knowledge_boundaries:
+        - Selka knows about part scarcity, not the key's true location.
+      attention: [stabilizer_parts, market_credit, market_row]
+  - id: ivo
+    name: Ivo Renn
+    faction_id: archive_order
+    role: Workshop Technician
+    current_location_id: workshop_lane
+    public_summary: Ivo can lawfully inspect his workshop safe and repair mechanisms.
+    private_summary: Ivo privately suspects the calibration key may be in the workshop safe.
+    cognitive_state:
+      goals:
+        - id: goal_ivo_check_safe
+          description: Lawfully inspect the workshop safe for the calibration key.
+          status: active
+          priority: 5
+      knowledge_boundaries:
+        - Ivo has private suspicion, not public canon knowledge, until verified inspection.
+      attention: [workshop_safe, calibration_key]
+  - id: nara
+    name: Nara Vey
+    faction_id: merchant_guild
+    role: Market Informant
+    current_location_id: market_row
+    public_summary: Nara Vey carries market rumors but has no canon authority.
+    private_summary: Nara suspects market stories are being used to manipulate repair access.
+    cognitive_state:
+      goals:
+        - id: goal_nara_track_rumors
+          description: Track which market rumors may affect civic repair decisions.
+          status: active
+          priority: 2
+      knowledge_boundaries:
+        - Nara can surface rumors but cannot validate canon facts.
+      attention: [market_row, stabilizer_parts, calibration_key]
+  - id: taren
+    name: Taren Sol
+    faction_id: civic_guard
+    role: Aqueduct Surveyor
+    current_location_id: old_aqueduct
+    public_summary: Taren Sol monitors Dawn Regulator symptoms at the Old Aqueduct.
+    private_summary: Taren believes a repair attempt needs both technical parts and civic clearance.
+    cognitive_state:
+      goals:
+        - id: goal_taren_report_aqueduct
+          description: Report Old Aqueduct instability without authorizing unsafe repairs.
+          status: active
+          priority: 4
+      knowledge_boundaries:
+        - Taren knows repair risk symptoms, not the calibration key's hidden location.
+      attention: [old_aqueduct, dawn_regulator, gate_lens]
+relationships:
+  - id: rel_mira_rowan
+    source_agent_id: mira
+    target_agent_id: rowan
+    kind: professional
+    summary: Mira needs Rowan's access cooperation for archive searches and public notices.
+    trust: 2
+  - id: rel_rowan_selka
+    source_agent_id: rowan
+    target_agent_id: selka
+    kind: tense
+    summary: Rowan distrusts guild pressure around scarce stabilizer parts.
+    trust: -1
+  - id: rel_ivo_mira
+    source_agent_id: ivo
+    target_agent_id: mira
+    kind: trusts
+    summary: Ivo trusts Mira's records but not her current guess about the key.
+    trust: 3
+  - id: rel_rowan_taren
+    source_agent_id: rowan
+    target_agent_id: taren
+    kind: professional
+    summary: Rowan relies on Taren's aqueduct reports before allowing high-impact repairs.
+    trust: 2
+  - id: rel_selka_nara
+    source_agent_id: selka
+    target_agent_id: nara
+    kind: transactional
+    summary: Selka treats Nara's rumors as useful but commercially risky signals.
+    trust: 1
+  - id: rel_nara_mira
+    source_agent_id: nara
+    target_agent_id: mira
+    kind: tense
+    summary: Nara's market rumors often conflict with Mira's archive evidence.
+    trust: -1
+  - id: rel_ivo_taren
+    source_agent_id: ivo
+    target_agent_id: taren
+    kind: professional
+    summary: Ivo needs Taren's aqueduct observations before planning regulator repairs.
+    trust: 2

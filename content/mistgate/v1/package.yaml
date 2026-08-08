@@ -1,0 +1,399 @@
+package_schema_version: "1.0"
+package_id: mistgate_product_v1_10
+world_definition_id: mistgate
+world_name_key: world.mistgate.name
+player_summary_key: player.summary
+content_version_id: mistgate_product_v1_10_0
+engine_schema_version: "0.1"
+source_seed_path: seeds/mistgate_v01
+source_seed_sha256: e2a9f888b2b327550f69b392a230ce51118d1badba459068bece3fced0f00253
+default_locale: zh-CN
+supported_locales: [zh-CN]
+entry_location_id: council_square
+
+routes:
+  - id: route_square_archive
+    from_location_id: council_square
+    to_location_id: central_archive
+  - id: route_square_market
+    from_location_id: council_square
+    to_location_id: market_row
+  - id: route_square_workshop
+    from_location_id: council_square
+    to_location_id: workshop_lane
+  - id: route_square_aqueduct
+    from_location_id: council_square
+    to_location_id: old_aqueduct
+
+actions:
+  - action_id: move_to_location
+    intent: move
+    label_key: action.move
+    target_type: location
+    mutates_world: true
+  - action_id: observe_scene
+    intent: observe
+    label_key: action.observe
+    target_type: scene
+    mutates_world: false
+  - action_id: investigate_area
+    intent: investigate
+    label_key: action.investigate
+    target_type: scene
+    mutates_world: true
+  - action_id: inspect_resource
+    intent: investigate
+    label_key: action.inspect_resource
+    target_type: resource
+    mutates_world: true
+
+  - action_id: ask_character
+    intent: dialogue
+    label_key: action.ask_character
+    target_type: character
+    mutates_world: true
+  - action_id: negotiate_resource
+    intent: negotiate
+    label_key: action.negotiate_resource
+    target_type: character
+    mutates_world: true
+  - action_id: repair_regulator
+    intent: repair
+    label_key: action.repair_regulator
+    target_type: entity
+    mutates_world: true
+  - action_id: break_commitment
+    intent: negotiate
+    label_key: action.break_commitment
+    target_type: character
+    mutates_world: true
+  - action_id: request_calibration_key
+    intent: negotiate
+    label_key: action.request_calibration_key
+    target_type: character
+    mutates_world: true
+  - action_id: validate_gate_lens
+    intent: investigate
+    label_key: action.validate_gate_lens
+    target_type: resource
+    mutates_world: true
+  - action_id: stabilize_regulator
+    intent: repair
+    label_key: action.stabilize_regulator
+    target_type: entity
+    mutates_world: true
+  - action_id: wait_for_world_response
+    intent: observe
+    label_key: action.wait_for_world_response
+    target_type: scene
+    mutates_world: true
+  - action_id: advance_world
+    intent: observe
+    label_key: action.advance_world
+    target_type: scene
+    mutates_world: true
+  - action_id: ask_world
+    intent: observe
+    label_key: action.ask_world
+    target_type: scene
+    mutates_world: true
+
+dialogue_options:
+  - id: ask_selka_about_parts
+    action_id: ask_character
+    character_id: selka
+    location_id: market_row
+    topic_ids: [stabilizer_parts]
+    label_key: dialogue.selka.parts.label
+    response_key: dialogue.selka.parts.response
+    knowledge_id: knowledge_stabilizer_parts_limited
+    knowledge_kind: confirmed_fact
+    knowledge_statement_key: dialogue.selka.parts.knowledge
+    knowledge_confidence: high
+    source_canon_fact_id: canon_stabilizer_parts_limited
+    relationship_delta: 1
+
+  - id: ask_nara_about_key_rumor
+    action_id: ask_character
+    character_id: nara
+    location_id: market_row
+    topic_ids: [calibration_key]
+    label_key: dialogue.nara.key.label
+    response_key: dialogue.nara.key.response
+    knowledge_id: knowledge_key_market_rumor
+    knowledge_kind: rumor
+    knowledge_statement_key: dialogue.nara.key.knowledge
+    knowledge_confidence: low
+    relationship_delta: 1
+
+resource_exchange_options:
+  - id: negotiate_selka_stabilizer_allotment
+    action_id: negotiate_resource
+    character_id: selka
+    location_id: market_row
+    resource_id: stabilizer_parts
+    quantity: 1
+    prerequisite_knowledge_ids: [knowledge_stabilizer_parts_limited]
+    minimum_trust: 1
+    commitment_id: commitment_provide_repair_evidence
+    label_key: exchange.selka.parts.label
+    response_key: exchange.selka.parts.response
+    commitment_description_key: exchange.selka.parts.commitment
+
+repair_options:
+  - id: repair_dawn_regulator_pressure
+    action_id: repair_regulator
+    location_id: old_aqueduct
+    target_entity_id: dawn_regulator
+    resource_id: stabilizer_parts
+    quantity: 1
+    commitment_id: commitment_provide_repair_evidence
+    outcome_id: outcome_city_holds
+    required_target_tags: [unstable, repair_target]
+    committed_event_tags: [regulator_pressure_contained, civic_response_active]
+    result_target_tags: [repair_progressed, regulator_pressure_contained, civic_response_active]
+    knowledge_id: knowledge_regulator_pressure_contained
+    knowledge_statement_key: repair.regulator.knowledge
+    label_key: repair.regulator.label
+    response_key: repair.regulator.response
+
+commitment_breach_options:
+  - id: break_selka_repair_evidence_commitment
+    action_id: break_commitment
+    location_id: market_row
+    character_id: selka
+    commitment_id: commitment_provide_repair_evidence
+    relationship_delta: -1
+    label_key: commitment.selka.break.label
+    response_key: commitment.selka.break.response
+
+resource_release_options:
+  - id: request_ivo_calibration_key
+    action_id: request_calibration_key
+    location_id: workshop_lane
+    character_id: ivo
+    container_entity_id: workshop_safe
+    resource_id: calibration_key
+    quantity: 1
+    required_discovery: true
+    knowledge_id: knowledge_calibration_key_secured
+    knowledge_statement_key: progression.key.knowledge
+    label_key: progression.key.label
+    response_key: progression.key.response
+
+resource_validation_options:
+  - id: validate_aqueduct_gate_lens
+    action_id: validate_gate_lens
+    location_id: old_aqueduct
+    resource_id: gate_lens
+    required_discovery: true
+    knowledge_id: knowledge_gate_lens_validated
+    knowledge_statement_key: progression.lens.knowledge
+    label_key: progression.lens.label
+    response_key: progression.lens.response
+
+final_repair_options:
+  - id: stabilize_dawn_regulator
+    action_id: stabilize_regulator
+    location_id: old_aqueduct
+    target_entity_id: dawn_regulator
+    consumed_resource_id: calibration_key
+    quantity: 1
+    prerequisite_knowledge_ids: [knowledge_calibration_key_secured, knowledge_gate_lens_validated]
+    required_target_tags: [repair_target, repair_progressed]
+    removed_target_tags: [repair_progressed, regulator_pressure_contained, civic_response_active]
+    committed_event_tags: [calibration_key_secured, stabilizer_parts_secured, regulator_repaired]
+    result_target_tags: [repair_target, calibrated, calibration_key_secured, stabilizer_parts_secured, regulator_repaired]
+    outcome_id: outcome_regulator_stabilized
+    knowledge_id: knowledge_regulator_stabilized
+    knowledge_statement_key: progression.final.knowledge
+    label_key: progression.final.label
+    response_key: progression.final.response
+
+world_response_options:
+  - id: selka_supports_fulfilled_repair
+    action_id: wait_for_world_response
+    outcome_id: outcome_regulator_stabilized
+    commitment_id: commitment_provide_repair_evidence
+    commitment_status: fulfilled
+    actor_entity_id: selka
+    response_kind: civic_support
+    relationship_delta: 1
+    committed_event_tags: [selka_civic_support, fulfilled_branch_response]
+    result_actor_tags: [guild_agent, civic_supply_coordinator]
+    label_key: world_response.wait.label
+    response_key: world_response.fulfilled.response
+  - id: selka_withdraws_after_breach
+    action_id: wait_for_world_response
+    outcome_id: outcome_regulator_stabilized
+    commitment_id: commitment_provide_repair_evidence
+    commitment_status: broken
+    actor_entity_id: selka
+    response_kind: social_withdrawal
+    relationship_delta: -1
+    committed_event_tags: [selka_support_withdrawn, broken_branch_response]
+    result_actor_tags: [guild_agent, repair_support_withdrawn]
+    label_key: world_response.wait.label
+    response_key: world_response.broken.response
+
+dialogue_expression_policy:
+  enabled: true
+  schema_version: dialogue_expression_v1
+  max_utterance_characters: 280
+  max_total_latency_ms: 60000
+  max_total_tokens: 6000
+  semantic_review_required: true
+
+onboarding:
+  - id: arrive_in_mistgate
+    title_key: onboarding.arrival.title
+    description_key: onboarding.arrival.description
+    action_id: observe_scene
+    target_id: council_square
+  - id: meet_guard_captain
+    title_key: onboarding.rowan.title
+    description_key: onboarding.rowan.description
+    action_id: observe_scene
+    target_id: rowan
+  - id: choose_first_lead
+    title_key: onboarding.first_lead.title
+    description_key: onboarding.first_lead.description
+    action_id: move_to_location
+
+presentations:
+  - { object_type: location, object_id: central_archive, name_key: location.central_archive.name, summary_key: location.central_archive.summary, accessibility_label_key: location.central_archive.accessibility }
+  - { object_type: location, object_id: council_square, name_key: location.council_square.name, summary_key: location.council_square.summary, accessibility_label_key: location.council_square.accessibility }
+  - { object_type: location, object_id: market_row, name_key: location.market_row.name, summary_key: location.market_row.summary, accessibility_label_key: location.market_row.accessibility }
+  - { object_type: location, object_id: workshop_lane, name_key: location.workshop_lane.name, summary_key: location.workshop_lane.summary, accessibility_label_key: location.workshop_lane.accessibility }
+  - { object_type: location, object_id: old_aqueduct, name_key: location.old_aqueduct.name, summary_key: location.old_aqueduct.summary, accessibility_label_key: location.old_aqueduct.accessibility }
+  - { object_type: character, object_id: mira, name_key: character.mira.name, summary_key: character.mira.summary, accessibility_label_key: character.mira.accessibility }
+  - { object_type: character, object_id: rowan, name_key: character.rowan.name, summary_key: character.rowan.summary, accessibility_label_key: character.rowan.accessibility }
+  - { object_type: character, object_id: selka, name_key: character.selka.name, summary_key: character.selka.summary, accessibility_label_key: character.selka.accessibility }
+  - { object_type: character, object_id: ivo, name_key: character.ivo.name, summary_key: character.ivo.summary, accessibility_label_key: character.ivo.accessibility }
+  - { object_type: character, object_id: nara, name_key: character.nara.name, summary_key: character.nara.summary, accessibility_label_key: character.nara.accessibility }
+  - { object_type: character, object_id: taren, name_key: character.taren.name, summary_key: character.taren.summary, accessibility_label_key: character.taren.accessibility }
+  - { object_type: resource, object_id: calibration_key, name_key: resource.calibration_key.name, summary_key: resource.calibration_key.summary, accessibility_label_key: resource.calibration_key.accessibility }
+  - { object_type: resource, object_id: stabilizer_parts, name_key: resource.stabilizer_parts.name, summary_key: resource.stabilizer_parts.summary, accessibility_label_key: resource.stabilizer_parts.accessibility }
+  - { object_type: resource, object_id: gate_lens, name_key: resource.gate_lens.name, summary_key: resource.gate_lens.summary, accessibility_label_key: resource.gate_lens.accessibility }
+  - { object_type: resource, object_id: market_credit, name_key: resource.market_credit.name, summary_key: resource.market_credit.summary, accessibility_label_key: resource.market_credit.accessibility }
+  - { object_type: entity, object_id: harmonic_tuner, name_key: entity.harmonic_tuner.name, summary_key: entity.harmonic_tuner.summary, accessibility_label_key: entity.harmonic_tuner.accessibility }
+  - { object_type: entity, object_id: dawn_regulator, name_key: entity.dawn_regulator.name, summary_key: entity.dawn_regulator.summary, accessibility_label_key: entity.dawn_regulator.accessibility }
+  - { object_type: entity, object_id: workshop_safe, name_key: entity.workshop_safe.name, summary_key: entity.workshop_safe.summary, accessibility_label_key: entity.workshop_safe.accessibility }
+
+canon_text_keys:
+  canon_dawn_regulator_unstable: canon.dawn_regulator_unstable
+  canon_tuner_records_regulator_instability: canon.tuner_records
+  canon_stabilizer_parts_limited: canon.stabilizer_parts_limited
+  canon_council_square_handles_repair_permissions: canon.council_permissions
+
+journal_seed_keys:
+  - journal.arrival
+  - journal.regulator
+  - journal.first_choice
+
+art_direction:
+  style: 绘本式档案幻想，柔和雾气与黄铜机械细节，清晰可读而非写实堆砌。
+  palette: [雾白, 青蓝, 低饱和紫, 暖黄铜, 奶油色]
+  camera: 第三人称角色可见的斜俯视 2.5D 场景，调查时使用克制的局部近景。
+  motion: 缓慢雾流、灯光呼吸和小范围环境运动，并提供减少动态模式。
+  prohibited_treatments: [赛博霓虹后台, 第一人称, 全3D写实, 像素风, 信息面板堆叠]
+
+asset_policy:
+  ai_assisted_allowed: true
+  provenance_required: true
+  licensing_review_required: true
+  human_visual_approval_required: true
+  living_artist_imitation_allowed: false
+
+asset_slots:
+  - { id: asset_scene_council_square, kind: location_scene, subject_id: council_square, accessibility_label_key: asset.scene.council_square, status: approved, uri: /assets/mistgate/council-square-v1.jpg, provenance_ref: frontend/public/assets/mistgate/PROVENANCE.md#council-square-v1, required_for_work_block: 2 }
+  - { id: asset_scene_central_archive, kind: location_scene, subject_id: central_archive, accessibility_label_key: asset.scene.central_archive, status: approved, uri: /assets/mistgate/central-archive-v1.jpg, provenance_ref: frontend/public/assets/mistgate/PROVENANCE.md#central-archive-v1, required_for_work_block: 2 }
+  - { id: asset_scene_market_row, kind: location_scene, subject_id: market_row, accessibility_label_key: asset.scene.market_row, status: approved, uri: /assets/mistgate/market-row-v1.jpg, provenance_ref: frontend/public/assets/mistgate/PROVENANCE.md#market-row-v1, required_for_work_block: 2 }
+  - { id: asset_scene_workshop_lane, kind: location_scene, subject_id: workshop_lane, accessibility_label_key: asset.scene.workshop_lane, status: approved, uri: /assets/mistgate/workshop-lane-v1.jpg, provenance_ref: frontend/public/assets/mistgate/PROVENANCE.md#workshop-lane-v1, required_for_work_block: 2 }
+  - { id: asset_scene_old_aqueduct, kind: location_scene, subject_id: old_aqueduct, accessibility_label_key: asset.scene.old_aqueduct, status: approved, uri: /assets/mistgate/old-aqueduct-v1.jpg, provenance_ref: frontend/public/assets/mistgate/PROVENANCE.md#old-aqueduct-v1, required_for_work_block: 2 }
+  - { id: asset_portrait_mira, kind: character_portrait, subject_id: mira, accessibility_label_key: asset.portrait.mira, status: approved, uri: /assets/mistgate/mira-v1.jpg, provenance_ref: frontend/public/assets/mistgate/PROVENANCE.md#mira-v1, required_for_work_block: 2 }
+  - { id: asset_portrait_rowan, kind: character_portrait, subject_id: rowan, accessibility_label_key: asset.portrait.rowan, status: approved, uri: /assets/mistgate/rowan-v1.jpg, provenance_ref: frontend/public/assets/mistgate/PROVENANCE.md#rowan-v1, required_for_work_block: 2 }
+  - { id: asset_portrait_selka, kind: character_portrait, subject_id: selka, accessibility_label_key: asset.portrait.selka, status: planned, required_for_work_block: 3 }
+  - { id: asset_portrait_ivo, kind: character_portrait, subject_id: ivo, accessibility_label_key: asset.portrait.ivo, status: planned, required_for_work_block: 3 }
+  - { id: asset_portrait_nara, kind: character_portrait, subject_id: nara, accessibility_label_key: asset.portrait.nara, status: planned, required_for_work_block: 3 }
+  - { id: asset_portrait_taren, kind: character_portrait, subject_id: taren, accessibility_label_key: asset.portrait.taren, status: planned, required_for_work_block: 3 }
+  - { id: asset_detail_regulator, kind: object_detail, subject_id: dawn_regulator, accessibility_label_key: asset.detail.regulator, status: planned, required_for_work_block: 3 }
+
+opportunities:
+  - id: opportunity_archive_records
+    title_key: opportunity.archive.title
+    description_key: opportunity.archive.description
+    location_id: central_archive
+    action_id: move_to_location
+    target_id: central_archive
+    is_optional: true
+  - id: opportunity_market_parts
+    title_key: opportunity.market.title
+    description_key: opportunity.market.description
+    location_id: market_row
+    action_id: investigate_area
+    completion_inventory_resource_ids: [stabilizer_parts]
+    completion_target_tags: [repair_progressed, regulator_repaired]
+  - id: opportunity_workshop_key
+    title_key: opportunity.workshop.title
+    description_key: opportunity.workshop.description
+    location_id: workshop_lane
+    action_id: investigate_area
+    completion_knowledge_ids: [knowledge_calibration_key_secured]
+    completion_inventory_resource_ids: [calibration_key]
+    completion_target_tags: [regulator_repaired]
+  - id: opportunity_aqueduct_signal
+    title_key: opportunity.aqueduct.title
+    description_key: opportunity.aqueduct.description
+    location_id: old_aqueduct
+    action_id: investigate_area
+    completion_knowledge_ids: [knowledge_gate_lens_validated]
+    completion_target_tags: [regulator_repaired]
+
+pacing_rules:
+  - id: pacing_regulator_instability
+    pressure_type: regulator_instability
+    warning_level: 6
+    crisis_level: 9
+    cooldown_turns: 2
+  - id: pacing_rumor_spread
+    pressure_type: rumor_spread
+    warning_level: 5
+    crisis_level: 8
+    cooldown_turns: 3
+
+recovery_paths:
+  - id: recovery_repair_access
+    blocked_action_id: stabilize_regulator
+    alternative_action_id: repair_regulator
+    target_location_id: old_aqueduct
+    guidance_key: recovery.repair_access
+  - id: recovery_missing_parts
+    blocked_action_id: repair_regulator
+    alternative_action_id: investigate_area
+    target_location_id: market_row
+    guidance_key: recovery.missing_parts
+  - id: recovery_missing_key
+    blocked_action_id: stabilize_regulator
+    alternative_action_id: investigate_area
+    target_location_id: workshop_lane
+    guidance_key: recovery.missing_key
+  - id: recovery_missing_lens
+    blocked_action_id: stabilize_regulator
+    alternative_action_id: investigate_area
+    target_location_id: old_aqueduct
+    guidance_key: recovery.missing_lens
+
+outcomes:
+  - id: outcome_regulator_stabilized
+    outcome_type: ending
+    title_key: outcome.stabilized.title
+    description_key: outcome.stabilized.description
+    required_committed_event_tags: [calibration_key_secured, stabilizer_parts_secured, regulator_repaired]
+  - id: outcome_city_holds
+    outcome_type: stable_continuation
+    title_key: outcome.continuation.title
+    description_key: outcome.continuation.description
+    required_committed_event_tags: [regulator_pressure_contained, civic_response_active]
+
+compatible_from_content_versions: []

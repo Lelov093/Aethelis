@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "basePath": "/api/v1",
+  "operations": [
+    { "method": "get", "path": "/api/v1/me" },
+    { "method": "get", "path": "/api/v1/world-definitions" },
+    { "method": "get", "path": "/api/v1/world-instances" },
+    { "method": "post", "path": "/api/v1/world-instances" },
+    { "method": "post", "path": "/api/v1/world-instances/{world_instance_id}/sessions" },
+    { "method": "get", "path": "/api/v1/world-instances/{world_instance_id}/saves" },
+    { "method": "post", "path": "/api/v1/world-instances/{world_instance_id}/saves" },
+    { "method": "post", "path": "/api/v1/world-instances/{world_instance_id}/saves/{save_point_id}/fork" },
+    { "method": "post", "path": "/api/v1/world-instances/{world_instance_id}/archive" },
+    { "method": "post", "path": "/api/v1/world-instances/{world_instance_id}/restore" }
+  ]
+}

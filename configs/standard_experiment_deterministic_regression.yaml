@@ -1,0 +1,22 @@
+run_id: standard_mistgate_formal_experiment
+seed_path: seeds/mistgate_v01
+mode: formal_deterministic
+formal_experiment_result: true
+random_seed: 7
+step_count: 20
+provider_mode: no_provider
+baseline_mode: none
+baseline_implemented: false
+ablation_mode: none
+ablation_implemented: false
+write_artifacts: true
+apply_state_diffs: false
+scenario_cycle:
+  - ivo_inspect_workshop_safe_fixture
+  - mira_search_archive_wrong_key
+  - selka_consume_stabilizer_part_fixture
+  - selka_restock_market_credit_fixture
+  - malformed_or_incomplete_action
+  - unsafe_force_open_safe
+  - player_claim_key_in_hand
+  - player_request_open_workshop_safe

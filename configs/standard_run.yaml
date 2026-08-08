@@ -1,0 +1,20 @@
+run_id: standard_mistgate_real_provider_preview
+mode: real_provider_preview
+formal_experiment_result: false
+allow_real_llm: true
+dry_run: true
+apply: false
+activation:
+  mode: static_trace
+  scoring_version: rule_based_v0
+  top_k: 1
+  selection_threshold: 1
+  allow_real_llm: false
+  allow_private_belief_scoring: false
+step_plan:
+  - step_id: step_ivo_real_provider_inspect
+    agent_id: ivo
+    actor_type: agent
+    scenario_id: inspect_workshop_safe
+    allow_real_llm: true
+    apply: false

@@ -1,0 +1,15 @@
+matrix_id: v04_run_matrix
+artifact_dir: runs/v04_run_matrix
+runs:
+  - run_id: v04_mistgate_standard_seed7
+    seed: seeds/mistgate_v01
+    config: configs/standard_experiment_deterministic_regression.yaml
+    random_seed: 7
+    step_count: 20
+    include_comparison: true
+  - run_id: v04_mistgate_civic_pressure_seed11
+    seed: seeds/mistgate_v01_civic_pressure_variant
+    config: configs/standard_experiment_deterministic_regression.yaml
+    random_seed: 11
+    step_count: 20
+    include_comparison: true

@@ -1,0 +1,80 @@
+schema_version: "0.1"
+permission_tags:
+  - guard_clearance
+public_facts:
+  - id: public_fact_lantern_needs_oil
+    claim: Harbor notices say the lantern needs signal oil oversight.
+    subject_ids: [lantern_console]
+    object_ids: [signal_oil]
+    location_id: lantern_room
+    visibility_scope: public
+  - id: public_fact_relief_crates_waiting
+    claim: Relief crates are visible near the Quay Gate.
+    subject_ids: [relief_crates]
+    object_ids: [quay_gate]
+    location_id: quay_gate
+    visibility_scope: public
+  - id: public_fact_gate_requires_watch
+    claim: Quay Gate access requires Harbor Watch clearance.
+    subject_ids: [quay_gate]
+    object_ids: [quay_lock]
+    location_id: quay_gate
+    visibility_scope: public
+rumors:
+  - id: rumor_pass_at_lantern
+    claim: A dock rumor says the harbor pass is near the lantern console.
+    source_agent_id: niven
+    confidence: medium
+    subject_ids: [harbor_pass]
+    object_ids: [lantern_console]
+    location_id: lantern_room
+    visibility_scope: location_visible
+pressure_seeds:
+  - id: pressure_signal_fuel
+    pressure_type: signal_fuel
+    level: 6
+    location_id: lantern_room
+    resource_id: signal_oil
+    description: Signal oil scarcity pressures lantern decisions.
+  - id: pressure_relief_delay
+    pressure_type: relief_delay
+    level: 7
+    location_id: quay_gate
+    resource_id: relief_crates
+    description: Relief crates are delayed at the quay.
+  - id: pressure_gate_access
+    pressure_type: gate_access
+    level: 5
+    location_id: quay_gate
+    description: Gate clearance pressure rises as access requests accumulate.
+action_metadata:
+  - id: action_inspect
+    action_type: inspect
+    allowed_actor_types: [agent]
+    required_permission_tags: []
+    target_types: [entity, resource]
+    description: Inspect a visible local object without modifying world state directly.
+  - id: action_search
+    action_type: search
+    allowed_actor_types: [agent]
+    required_permission_tags: []
+    target_types: [location, entity]
+    description: Search a visible local source for candidate evidence.
+  - id: action_trade
+    action_type: trade
+    allowed_actor_types: [agent]
+    required_permission_tags: []
+    target_types: [resource]
+    description: Move a verified supply quantity through governed accounting.
+  - id: action_request_access
+    action_type: request_access
+    allowed_actor_types: [agent, player]
+    required_permission_tags: [guard_clearance]
+    target_types: [location, permission]
+    description: Request access through Harbor Watch governance.
+  - id: action_report_rumor
+    action_type: report_rumor
+    allowed_actor_types: [agent, player]
+    required_permission_tags: []
+    target_types: [rumor]
+    description: Report a rumor as non-canon candidate information.

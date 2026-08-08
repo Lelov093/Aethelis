@@ -1,0 +1,12 @@
+evaluation_id: v04_aggregate_evaluation
+allow_expected_ablation_failures: true
+expected_failure_variant_ids:
+  - free_multi_agent_chat
+  - shared_context_agents
+  - rag_memory_agents
+  - rule_only_world_simulation
+fail_on_provider_called: true
+fail_on_raw_text_saved: true
+max_failed_base_runs: 0
+max_unexpected_variant_failures: 0
+max_unexpected_bad_cases: 0

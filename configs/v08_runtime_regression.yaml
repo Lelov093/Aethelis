@@ -1,0 +1,17 @@
+regression_id: v08_runtime_regression
+artifact_dir: runs/v08_runtime_regression
+targets:
+  - id: v08_provider_proposal_missing_settings_stops_before_chain
+    kind: provider_proposal_missing_settings_stops_before_chain
+
+  - id: v08_provider_proposal_schema_failure_no_event_candidate
+    kind: provider_proposal_schema_failure_no_event_candidate
+
+  - id: v08_provider_proposal_governance_chain
+    kind: provider_proposal_governance_chain
+
+  - id: v08_provider_proposal_no_raw_text_artifacts
+    kind: provider_proposal_no_raw_text_artifacts
+
+  - id: v08_deterministic_regressions_still_no_provider
+    kind: deterministic_regressions_still_no_provider

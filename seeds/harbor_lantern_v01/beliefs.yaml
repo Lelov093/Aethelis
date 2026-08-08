@@ -1,0 +1,51 @@
+schema_version: "0.1"
+beliefs:
+  - id: belief_elin_manifest_has_pass_record
+    owner_agent_id: elin
+    kind: private_belief
+    claim: The cargo manifest likely records the current harbor pass.
+    truth_status: partially_true
+    confidence: high
+    subject_ids: [harbor_pass]
+    object_ids: [cargo_manifest]
+    related_canon_fact_ids: [canon_harbor_pass_in_manifest]
+    source_memory_ids: [mem_elin_manifest_audit]
+    status: active
+  - id: belief_niven_pass_at_lantern
+    owner_agent_id: niven
+    kind: belief
+    claim: The harbor pass may be near the lantern console.
+    truth_status: "false"
+    confidence: medium
+    subject_ids: [harbor_pass]
+    object_ids: [lantern_console]
+    source_memory_ids: [mem_niven_signal_shift]
+    status: active
+  - id: belief_sora_crates_ready
+    owner_agent_id: sora
+    kind: belief
+    claim: Relief crates can be released only after governed confirmation.
+    truth_status: partially_true
+    confidence: high
+    subject_ids: [relief_crates]
+    object_ids: [quay_gate]
+    related_canon_fact_ids: [canon_relief_crates_wait_at_quay]
+    source_memory_ids: [mem_sora_crate_count]
+    status: active
+  - id: belief_bram_gate_requires_clearance
+    owner_agent_id: bram
+    kind: belief
+    claim: Quay Gate access must wait for Harbor Watch clearance.
+    truth_status: partially_true
+    confidence: high
+    subject_ids: [quay_gate, quay_lock]
+    related_canon_fact_ids: [canon_quay_gate_requires_watch_clearance]
+    source_memory_ids: [mem_bram_gate_order]
+    status: active
+secrets:
+  - id: secret_elin_manifest_note
+    owner_agent_id: elin
+    claim: Elin privately suspects the manifest record can settle the harbor pass dispute.
+    subject_ids: [elin, harbor_pass]
+    object_ids: [cargo_manifest]
+    confidence: medium

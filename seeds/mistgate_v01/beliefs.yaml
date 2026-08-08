@@ -1,0 +1,96 @@
+schema_version: "0.1"
+beliefs:
+  - id: belief_mira_key_in_archive
+    owner_agent_id: mira
+    kind: belief
+    claim: The calibration key may be hidden somewhere in the Central Archive.
+    truth_status: "false"
+    confidence: medium
+    subject_ids: [calibration_key]
+    object_ids: [central_archive]
+    source_memory_ids: [mem_mira_archive_ledger]
+    status: active
+  - id: belief_mira_archive_has_repair_record
+    owner_agent_id: mira
+    kind: belief
+    claim: The archive likely contains a maintenance record relevant to the Dawn Regulator.
+    truth_status: partially_true
+    confidence: high
+    subject_ids: [dawn_regulator]
+    object_ids: [central_archive]
+    related_canon_fact_ids: [canon_archive_has_maintenance_records_not_key]
+    source_memory_ids: [mem_mira_archive_ledger]
+    status: active
+  - id: belief_ivo_key_in_safe
+    owner_agent_id: ivo
+    kind: private_belief
+    claim: The calibration key may be inside the workshop safe.
+    truth_status: unknown
+    confidence: high
+    subject_ids: [calibration_key]
+    object_ids: [workshop_safe]
+    related_canon_fact_ids: [canon_key_in_workshop_safe]
+    source_memory_ids: [mem_ivo_safe_installation]
+    status: active
+  - id: belief_rowan_no_key_location
+    owner_agent_id: rowan
+    kind: belief
+    claim: The key's true location is not known to the Civic Guard.
+    truth_status: unknown
+    confidence: high
+    subject_ids: [calibration_key]
+    status: active
+  - id: belief_rowan_repair_requires_clearance
+    owner_agent_id: rowan
+    kind: belief
+    claim: High-impact regulator repairs require guard clearance and a repair permit.
+    truth_status: partially_true
+    confidence: high
+    subject_ids: [dawn_regulator]
+    object_ids: [council_square]
+    source_memory_ids: [mem_rowan_repair_order]
+    status: active
+  - id: belief_selka_parts_are_leverage
+    owner_agent_id: selka
+    kind: belief
+    claim: Stabilizer parts are scarce enough to matter in negotiations.
+    truth_status: partially_true
+    confidence: high
+    subject_ids: [stabilizer_parts]
+    object_ids: [market_row]
+    related_canon_fact_ids: [canon_repair_requires_key_and_parts]
+    source_memory_ids: [mem_selka_parts_inventory]
+    status: active
+  - id: belief_nara_market_key_rumor
+    owner_agent_id: nara
+    kind: rumor
+    claim: A market rumor says the calibration key passed through Market Row.
+    truth_status: unknown
+    confidence: low
+    subject_ids: [calibration_key]
+    object_ids: [market_row]
+    source_memory_ids: [mem_nara_market_rumor]
+    status: active
+  - id: belief_taren_aqueduct_needs_permit
+    owner_agent_id: taren
+    kind: belief
+    claim: Any Old Aqueduct repair attempt should wait for a repair permit.
+    truth_status: partially_true
+    confidence: high
+    subject_ids: [old_aqueduct, dawn_regulator]
+    object_ids: [council_square]
+    source_memory_ids: [mem_taren_aqueduct_surge]
+    status: active
+secrets:
+  - id: secret_ivo_safe_suspicion
+    owner_agent_id: ivo
+    claim: Ivo privately suspects the workshop safe contains the calibration key.
+    subject_ids: [ivo, calibration_key]
+    object_ids: [workshop_safe]
+    confidence: high
+  - id: secret_archive_sealed_note
+    owner_faction_id: archive_order
+    claim: A sealed archive note says the archive records are about repair procedure, not key custody.
+    subject_ids: [central_archive, dawn_regulator]
+    object_ids: [calibration_key]
+    confidence: medium
